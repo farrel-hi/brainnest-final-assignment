@@ -14,6 +14,13 @@
     background-color: aqua;
 }
 
+p#math-expression{
+  font-size: 30px;
+}
+
+p#input{
+  font-size: 40px;
+}
 
 .grid-container {
     display: grid;
@@ -29,16 +36,9 @@
     text-align: center;
   }
 
-  .plus-double{
-    grid-column-start: 4;
-    grid-row: 2 / span 2;
-  }
-  .equal-double{
-    grid-column-start: 4;
-    grid-row: 4 / span 2;
-  }
   .zero-double{
     grid-column: 1 / span 2;
     grid-row-start: 5;
   }
+
 
