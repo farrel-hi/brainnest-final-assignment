@@ -20,24 +20,22 @@ function division(firstValue,secondValue) {
 }
 
 function operate(firstValue,secondValue,operator) { //firstValue & SecondValue still String
-    if (operationOrder == 3){    
-        let newFirstValue = parseInt(firstValue);
-        let newSecondValue = parseInt(secondValue);
-        if (operator == "+"){
-            addition(newFirstValue,newSecondValue)
-        }
-        else if (operator == "-"){
-            substraction(newFirstValue,newSecondValue)
-        }
-        else if (operator == "/"){
-            division(newFirstValue,newSecondValue)
-        }
-        else if (operator == "*"){
-            multiplication(newFirstValue,newSecondValue)
-        }
-        else{
-            errorMessage();
-        }
+    let newFirstValue = parseInt(firstValue);
+    let newSecondValue = parseInt(secondValue);
+    if (operator == "+"){
+        addition(newFirstValue,newSecondValue)
+    }
+    else if (operator == "-"){
+        substraction(newFirstValue,newSecondValue)
+    }
+    else if (operator == "/"){
+        division(newFirstValue,newSecondValue)
+    }
+    else if (operator == "*"){
+        multiplication(newFirstValue,newSecondValue)
+    }
+    else{
+        errorMessage();
     }
 }
 
@@ -75,8 +73,6 @@ function displayValue(){
         case 3:
             displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]} ${arrUserInput[2]}`;
             displayValueResult.innerHTML = numResult.toString();
-
-            // operationOrder = 0;
             break;
         case 4:
             displayMathExpression.innerHTML = "0";
@@ -103,9 +99,25 @@ function changeValue(){
     }
 }
 
+function backspace(){
+    let inputLength = arrUserInput[operationOrder].length;
+    let newValue  = arrUserInput[operationOrder].slice(0,inputLength-1);
+    
+    arrUserInput[operationOrder] = newValue;
+}
+
 function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     if(buttonInnerHTML == "/" || buttonInnerHTML == "*" || buttonInnerHTML == "-" ||buttonInnerHTML == "+" ){
-        arrUserInput[1] = buttonInnerHTML;
+        console.log(`operation Order: ${operationOrder}`);
+        if (operationOrder == 2){
+            operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
+            arrUserInput[0] = numResult.toString();
+            arrUserInput[1] = buttonInnerHTML;
+            arrUserInput[2] = "";
+        }
+        else if (operationOrder == 0){
+            arrUserInput[1] = buttonInnerHTML;
+        }
         operationOrder=2;
     }
     else if(buttonInnerHTML == "="){
@@ -118,6 +130,9 @@ function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     else if (buttonInnerHTML == "C"){
         operationOrder = 4;
         clearAllInput();
+    }
+    else if (buttonInnerHTML == "BS"){
+        backspace();
     }
     else{
         addNumber(buttonInnerHTML);  
