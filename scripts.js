@@ -45,6 +45,7 @@ function clearAllInput(){
     arrUserInput[0] = "";
     arrUserInput[1] = "";
     arrUserInput[2] = "";
+    numResult = "";
 }
 
 function displayValue(){
@@ -52,13 +53,19 @@ function displayValue(){
     let displayMathExpression = document.getElementById("math-expression");
     switch (operationOrder) {
         case 0:
-            displayValueResult.innerHTML = `${arrUserInput[0]}`;
+            if(arrUserInput[operationOrder] == ""){
+                displayValueResult.innerHTML = "0";
+            }
+            else{
+                displayValueResult.innerHTML = `${arrUserInput[0]}`;
+            }
             break;
         case 1:
             displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]}`;
             break;
         case 2:
             if (arrUserInput[2] == ""){
+                displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]}`;
                 displayValueResult.innerHTML = "0";
             }
             else{
@@ -69,7 +76,7 @@ function displayValue(){
             displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]} ${arrUserInput[2]}`;
             displayValueResult.innerHTML = numResult.toString();
 
-            operationOrder = 0;
+            // operationOrder = 0;
             break;
         case 4:
             displayMathExpression.innerHTML = "0";
@@ -86,16 +93,24 @@ function addNumber(newValue){
     arrUserInput[operationOrder] = arrUserInput[operationOrder] + newValue;
 }
 
+function changeValue(){
+    if (operationOrder == 3){
+        arrUserInput[0] = numResult.toString();
+        arrUserInput[1] = "";
+        arrUserInput[2] = "";
+        numResult = "";
+        operationOrder = 0;
+    }
+}
+
 function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     if(buttonInnerHTML == "/" || buttonInnerHTML == "*" || buttonInnerHTML == "-" ||buttonInnerHTML == "+" ){
-        operationOrder+=1;
-        arrUserInput[operationOrder] = buttonInnerHTML;
-        displayValue();
-        operationOrder+=1;
-
+        arrUserInput[1] = buttonInnerHTML;
+        operationOrder=2;
     }
     else if(buttonInnerHTML == "="){
         operationOrder = 3;
+        operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
     }
     else if (buttonInnerHTML == "CE"){ 
         arrUserInput[operationOrder] = "";
@@ -113,9 +128,12 @@ const btn = document.querySelectorAll('button');
 for (let i = 0;i<btn.length;i++){
     btn[i].addEventListener("click", function(){
         let clickValue = btn[i].innerHTML;
-        console.log(clickValue);
+        console.log(arrUserInput[0]);
+        console.log(arrUserInput[1]);
+        console.log(arrUserInput[2]);
+        console.log(`operation Order: ${operationOrder}`);
         checkButton(clickValue);
-        operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
         displayValue();
+        changeValue();
     });
 }
