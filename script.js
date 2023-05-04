@@ -1,4 +1,4 @@
-let arrUserInput = [0,"",0]; //format: firstValue, Operator, secondValue
+let arrUserInput = ["","",""]; //format: firstValue, Operator, secondValue
 let userFirstInput = "";
 let userSecondInput = "";
 let userOperatorInput = "";
@@ -43,13 +43,13 @@ function operate(firstValue,secondValue,operator) {
 }
 
 function addInputNumberValue(newNumberValue, order) {
-    if (arrUserInput[order] == 0){
-        arrUserInput[order] = newNumberValue;
-    }
-    else{
-        let turnToTextFirst = arrUserInput[order].toString() + newNumberValue.toString() ;
-        arrUserInput[order] = parseInt(turnToTextFirst);
-    }
+    // if (arrUserInput[order] == 0){
+    //     arrUserInput[order] = newNumberValue;
+    // }
+    // else{
+    //     let turnToTextFirst = arrUserInput[order].toString() + newNumberValue.toString() ;
+    //     arrUserInput[order] = parseInt(turnToTextFirst);
+    // }
 }
 
 // addInputNumberValue(9,0);
@@ -135,9 +135,9 @@ function checkButton(buttonInnerHTML) {
     }
     else{
         // let newValue = parseInt(buttonInnerHTML);   
-        // addInputNumberValue(newValue,operationOrder);  
+        addInputNumberValue(newValue,operationOrder);  
         // displayValue();  
-        addNewInput(buttonInnerHTML,operationOrder);
+        // addNewInput(buttonInnerHTML,operationOrder);
         displayValue();
     }
 }
