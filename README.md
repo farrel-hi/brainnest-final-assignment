@@ -1,4 +1,7 @@
 # brainnest-final-assignment
+Creating a Simple Calculator using HTML, CSS, and JavaScript
+
+## Preview Link
 Preview Link: https://farrel-hi.github.io/brainnest-final-assignment/
 
 ## Style Guide
