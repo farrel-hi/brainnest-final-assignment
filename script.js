@@ -1,4 +1,7 @@
 let arrUserInput = [0,"",0]; //format: firstValue, Operator, secondValue
+let userFirstInput = "";
+let userSecondInput = "";
+let userOperatorInput = "";
 let operationOrder = 0; // 0 = firstValue, 1 = Operator, 2 = secondValue
 
 function errorMessage() {
@@ -64,20 +67,59 @@ function clearAllInput(){
     arrUserInput[2] = 0;
 }
 
+function addNewInput(newValue, order){ 
+    console.log(userFirstInput);
+    console.log(typeof newValue);
+    console.log(newValue);
+    if (order == 0){
+        console.log(`koko`);
+        userFirstInput = userFirstInput + newValue;
+    }
+    else if (order == 2){
+        userSecondInput = userSecondInput + newValue;
+    }
+    else{
+        errorMessage();
+    }
+
+    // let combineValue = ;
+    // arrValue.push(newValue);
+    // for (let i=0;arrValue.length;i++){
+    //     arrValue[i]
+    // }
+}
+
 function displayValue(){
+    let displayValueResult = document.getElementById("input");
+    let displayMathExpression = document.getElementById("math-expression");
     if (operationOrder == 3){
-        let resultValue = operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
-        let displayValueResult = document.getElementById("input");
-        let displayMathExpression = document.getElementById("math-expression");
+        // let resultValue = operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
+        let resultValue = operate(parseInt(userFirstInput),parseInt(userSecondInput),userOperatorInput);
         displayValueResult.innerHTML = resultValue;
-        displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]} ${arrUserInput[2]} =`
-        arrUserInput[0] = resultValue;
+        // displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]} ${arrUserInput[2]} =`
+        displayMathExpression.innerHTML == `${userFirstInput} ${userOperatorInput} =`;
+        displayValueResult.innerHTML == resultValue.toString;
+        // arrUserInput[0] = resultValue;
+    }
+    else if (operationOrder == 0){
+        // displayValueResult.innerHTML == `${arrUserInput[0]}`;
+        displayValueResult.innerHTML == userFirstInput;
+    }
+    else if (operationOrder == 1){
+        // displayValueResult.innerHTML == `${arrUserInput[0]} ${arrUserInput[1]}`;
+        displayValueResult.innerHTML == `${userFirstInput} ${userOperatorInput}`;
+    }
+    else{
+        errorMessage();
     }
 }
 
 function checkButton(buttonInnerHTML) {
     if(buttonInnerHTML == "/" || buttonInnerHTML == "*" || buttonInnerHTML == "-" ||buttonInnerHTML == "+" ){
-        arrUserInput[1] = buttonInnerHTML;
+        operationOrder+=1;
+        // arrUserInput[1] = buttonInnerHTML;
+        userOperatorInput = buttonInnerHTML;
+        displayValue();
         operationOrder+=1;
     }
     else if(buttonInnerHTML == "="){
@@ -92,18 +134,29 @@ function checkButton(buttonInnerHTML) {
         clearAllInput();
     }
     else{
-        let newValue = parseInt(buttonInnerHTML);   
-        addInputNumberValue(newValue,operationOrder);    
-        operationOrder+=1;
+        // let newValue = parseInt(buttonInnerHTML);   
+        // addInputNumberValue(newValue,operationOrder);  
+        // displayValue();  
+        addNewInput(buttonInnerHTML,operationOrder);
+        displayValue();
     }
 }
 
-const btn = document.querySelector('button');
+const btn = document.querySelectorAll('button');
+// console.log(btn);
+for (let i = 0;i<btn.length;i++){
+    btn[i].addEventListener("click", function(){
+        let clickValue = btn[i].innerHTML;
+        console.log(clickValue);
+        checkButton(clickValue);
+    });
+}
 
-console.log(checkButton("9"));
-console.log(checkButton("*"));
-console.log(checkButton("3"));
-console.log(checkButton("="));
+// console.log(checkButton("9"));
+// // console.log(checkButton("9"));
+// console.log(checkButton("*"));
+// console.log(checkButton("3"));
+// console.log(checkButton("="));
 
 
 // console.log(btn.length);
@@ -112,7 +165,8 @@ console.log(checkButton("="));
 // console.log(typeof btn[5].innerHTML);
 
 // btn.addEventListener('click', () => {
-//     let clickValue = 
+//     let clickValue = btn.innerHTML;
+//     console.log(btn);
 // })
 
 // console.log(operate(3,9,"+"))
