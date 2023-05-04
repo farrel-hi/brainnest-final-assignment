@@ -1,17 +1,61 @@
 *{
     margin: 0;
+
+    font-family: 'Josefin Sans', Courier, monospace;
+    font-weight: 600;
+}
+
+body{
+  background-color: #ededed;
+}
+
+/* header{
+  padding-left: 20px;
+
+  height: 8vh;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  background-color: #a060fa;
 }
 
 
+
+footer{
+  height: 4vh;
+  min-width: 100%;
+  position: absolute;
+  bottom: 0;
+
+  background-color: #a060fa;
+} */
+
+main{
+  min-height: 100vh;
+  max-width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 .display{
-    width: 100vw;
+  padding:20px 20px 0 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
 
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: flex-end;
+  border-radius: 20px 20px 0 0;
+  background-color: #191919;
+  color: #ffffff;
+}
 
-    background-color: aqua;
+.display > *{
+  margin-top: 10px;
 }
 
 p#math-expression{
@@ -23,22 +67,35 @@ p#input{
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    background-color: #2196F3;
-    padding: 10px;
-  }
-  .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
+  padding: 10px;
+
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+
+  border-radius: 0 0 20px 20px;
+  background-color: #191919;
   }
 
-  .zero-double{
-    grid-column: 1 / span 2;
-    grid-row-start: 5;
-  }
+.grid-item {
+  padding: 20px;
+  margin: 10px;
 
+  min-width: 100px;
+
+  background-color:  #ffffff;
+  border-radius: 20px;
+
+  font-size: 2em;
+  text-align: center;
+}
+
+.zero-double{
+  grid-column: 1 / span 2;
+  grid-row-start: 5;
+}
+
+button.equal{
+  color:#ffffff;
+  background-color: #a060fa ;
+}
 

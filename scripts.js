@@ -45,7 +45,6 @@ function clearAllInput(){
     arrUserInput[0] = "";
     arrUserInput[1] = "";
     arrUserInput[2] = "";
-    operationOrder = 0;
 }
 
 function displayValue(){
@@ -54,26 +53,30 @@ function displayValue(){
     switch (operationOrder) {
         case 0:
             displayValueResult.innerHTML = `${arrUserInput[0]}`;
-
-
             break;
         case 1:
             displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]}`;
-            displayValueResult.innerHTML = `0`;
-
             break;
         case 2:
-            displayValueResult.innerHTML = `${arrUserInput[2]}`;
-
+            if (arrUserInput[2] == ""){
+                displayValueResult.innerHTML = "0";
+            }
+            else{
+                displayValueResult.innerHTML = `${arrUserInput[2]}`;
+            }
             break;
         case 3:
-            displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]} ${arrUserInput[2]}=`;
+            displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]} ${arrUserInput[2]}`;
             displayValueResult.innerHTML = numResult.toString();
 
             operationOrder = 0;
-
             break;
-    
+        case 4:
+            displayMathExpression.innerHTML = "0";
+            displayValueResult.innerHTML = "0";
+
+            operationOrder = 0;
+            break;
         default:
             errorMessage();
     }
@@ -98,6 +101,7 @@ function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
         arrUserInput[operationOrder] = "";
     }
     else if (buttonInnerHTML == "C"){
+        operationOrder = 4;
         clearAllInput();
     }
     else{
