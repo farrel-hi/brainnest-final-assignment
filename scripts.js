@@ -121,45 +121,59 @@ function backspace(){
 
 function checkDecimal(){
     let tempValueCheck = arrUserInput[operationOrder];
-    for (let i=0;i<tempValueCheck.length;i++){
-        if (tempValueCheck[i] != "." && i == tempValueCheck.length-1){
-            addNumber(".");
-        }
-        else if (tempValueCheck[i] != "." && i != tempValueCheck.length-1){
-            continue
-        }
-        else{
-            break;
+    console.log(tempValueCheck.length);
+    if (tempValueCheck.length == 0){ //for input: dot; first dot
+        addNumber("0.");
+    }
+    else{
+        for (let i=0;i<tempValueCheck.length;i++){
+            if (tempValueCheck[i] != "." && i == tempValueCheck.length-1){
+                addNumber(".");
+            }
+            else if (tempValueCheck[i] != "." && i != tempValueCheck.length-1){
+                continue
+            }
+            else{
+                break;
+            }
         }
     }
+    
 }
 
 function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     if(buttonInnerHTML == "/" || buttonInnerHTML == "*" || buttonInnerHTML == "-" ||buttonInnerHTML == "+" ){
-        if (operationOrder == 2){
+        if (operationOrder == 2 && arrUserInput[2] !=""){ //for input: num -> op -> num -> op
             operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
             arrUserInput[0] = numResult.toString();
             arrUserInput[1] = buttonInnerHTML;
             arrUserInput[2] = "";
         }
-        else if (operationOrder == 0){
+        else if (operationOrder == 2 && arrUserInput[2] ==""){ //for input: num -> op -> op
+            arrUserInput[1] = buttonInnerHTML;
+        }
+        else if (operationOrder == 0 && arrUserInput[0] != ""){ //for input: num->op
+            arrUserInput[1] = buttonInnerHTML;
+        }
+        else if(operationOrder == 0 && arrUserInput[0] == ""){ //for input: op
+            arrUserInput[0] = "0";
             arrUserInput[1] = buttonInnerHTML;
         }
         operationOrder=2;
     }
     else if(buttonInnerHTML == "="){
         operationOrder = 3;
-        if(arrUserInput[0] != "" && arrUserInput[1] == "" && arrUserInput[2] == ""){ //when clicking order is: num -> equal, it shows num = on the math-expression and num on the input
+        if(arrUserInput[0] != "" && arrUserInput[1] == "" && arrUserInput[2] == ""){ //for input: num -> equal, it shows num = on the math-expression and num on the input
             operationOrder = 5;
         }
         else if(arrUserInput[2] == "0" && arrUserInput[1] == "/"){
             operationOrder = 6;
         }
-        else if(arrUserInput[0] != "" && arrUserInput[1] != "" && arrUserInput[2] == ""){ //when clicking order is: num -> operator -> equal, it uses the first num as a second num
+        else if(arrUserInput[0] != "" && arrUserInput[1] != "" && arrUserInput[2] == ""){ //for input: num -> operator -> equal, it uses the first num as a second num
             arrUserInput[2] = arrUserInput[0];
             operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
         }
-        else if(arrUserInput[0] != "" && arrUserInput[1] != "" && arrUserInput[1] != ""){ //when clicking order is : num -> operator -> num -> equal, the normal way
+        else if(arrUserInput[0] != "" && arrUserInput[1] != "" && arrUserInput[1] != ""){ //for input: num -> operator -> num -> equal, the normal way
             operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
         }
         else{
