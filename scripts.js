@@ -20,7 +20,7 @@ function division(firstValue,secondValue) {
 }
 
 function operate(firstValue,secondValue,operator) { //firstValue & SecondValue still String
-    let newFirstValue = parseInt(firstValue);
+    let newFirstValue = parseInt(firstValue); //parseInt rounded integer
     let newSecondValue = parseInt(secondValue);
     if (operator == "+"){
         addition(newFirstValue,newSecondValue)
@@ -64,7 +64,7 @@ function displayValue(){
         case 2:
             if (arrUserInput[2] == ""){
                 displayMathExpression.innerHTML = `${arrUserInput[0]} ${arrUserInput[1]}`;
-                displayValueResult.innerHTML = "0";
+                displayValueResult.innerHTML = `${arrUserInput[0]}`;
             }
             else{
                 displayValueResult.innerHTML = `${arrUserInput[2]}`;
@@ -79,6 +79,19 @@ function displayValue(){
             displayValueResult.innerHTML = "0";
 
             operationOrder = 0;
+            break;
+        case 5:
+            displayMathExpression.innerHTML = `${arrUserInput[0]} =`;
+            displayValueResult.innerHTML = `${arrUserInput[0]}`;
+
+            operationOrder = 0;
+            arrUserInput[0] = "";
+            break;
+        case 6:
+            displayMathExpression.innerHTML = `${arrUserInput[0]} / 0`;
+            displayValueResult.innerHTML = `Cannot divide by zero`;
+
+            operationOrder = 3;
             break;
         default:
             errorMessage();
@@ -108,7 +121,6 @@ function backspace(){
 
 function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     if(buttonInnerHTML == "/" || buttonInnerHTML == "*" || buttonInnerHTML == "-" ||buttonInnerHTML == "+" ){
-        console.log(`operation Order: ${operationOrder}`);
         if (operationOrder == 2){
             operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
             arrUserInput[0] = numResult.toString();
@@ -122,7 +134,22 @@ function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     }
     else if(buttonInnerHTML == "="){
         operationOrder = 3;
-        operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
+        if(arrUserInput[0] != "" && arrUserInput[1] == "" && arrUserInput[2] == ""){ //when clicking order is: num -> equal, it shows num = on the math-expression and num on the input
+            operationOrder = 5;
+        }
+        else if(arrUserInput[2] == "0" && arrUserInput[1] == "/"){
+            operationOrder = 6;
+        }
+        else if(arrUserInput[0] != "" && arrUserInput[1] != "" && arrUserInput[2] == ""){ //when clicking order is: num -> operator -> equal, it uses the first num as a second num
+            arrUserInput[2] = arrUserInput[0];
+            operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
+        }
+        else if(arrUserInput[0] != "" && arrUserInput[1] != "" && arrUserInput[1] != ""){ //when clicking order is : num -> operator -> num -> equal, the normal way
+            operate(arrUserInput[0],arrUserInput[2],arrUserInput[1]);
+        }
+        else{
+            operationOrder = 4;
+        }
     }
     else if (buttonInnerHTML == "CE"){ 
         arrUserInput[operationOrder] = "";
@@ -143,10 +170,10 @@ const btn = document.querySelectorAll('button');
 for (let i = 0;i<btn.length;i++){
     btn[i].addEventListener("click", function(){
         let clickValue = btn[i].innerHTML;
-        console.log(arrUserInput[0]);
-        console.log(arrUserInput[1]);
-        console.log(arrUserInput[2]);
-        console.log(`operation Order: ${operationOrder}`);
+        // console.log(arrUserInput[0]);
+        // console.log(arrUserInput[1]);
+        // console.log(arrUserInput[2]);
+        // console.log(`operation Order: ${operationOrder}`);
         checkButton(clickValue);
         displayValue();
         changeValue();
