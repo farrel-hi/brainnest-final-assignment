@@ -119,6 +119,21 @@ function backspace(){
     arrUserInput[operationOrder] = newValue;
 }
 
+function checkDecimal(){
+    let tempValueCheck = arrUserInput[operationOrder];
+    for (let i=0;i<tempValueCheck.length;i++){
+        if (tempValueCheck[i] != "." && i == tempValueCheck.length-1){
+            addNumber(".");
+        }
+        else if (tempValueCheck[i] != "." && i != tempValueCheck.length-1){
+            continue
+        }
+        else{
+            break;
+        }
+    }
+}
+
 function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     if(buttonInnerHTML == "/" || buttonInnerHTML == "*" || buttonInnerHTML == "-" ||buttonInnerHTML == "+" ){
         if (operationOrder == 2){
@@ -160,6 +175,9 @@ function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     }
     else if (buttonInnerHTML == "BS"){
         backspace();
+    }
+    else if (buttonInnerHTML == "."){
+        checkDecimal();
     }
     else{
         addNumber(buttonInnerHTML);  
