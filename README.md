@@ -12,5 +12,6 @@ Primary Color:
 Secondary Color: 
     White: #ffffff
 Accent Color: 
+    Darker Purple: #7b4ec0
     Purple: #a060fa 
     Grey: #6a6769
