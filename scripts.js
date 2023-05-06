@@ -20,8 +20,8 @@ function division(firstValue,secondValue) {
 }
 
 function operate(firstValue,secondValue,operator) { //firstValue & SecondValue still String
-    let newFirstValue = parseInt(firstValue); //parseInt rounded integer
-    let newSecondValue = parseInt(secondValue);
+    let newFirstValue = parseFloat(firstValue); 
+    let newSecondValue = parseFloat(secondValue);
     if (operator == "+"){
         addition(newFirstValue,newSecondValue)
     }
@@ -192,6 +192,11 @@ function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     }
     else if (buttonInnerHTML == "."){
         checkDecimal();
+    }
+    else if(buttonInnerHTML == "0"){
+        if (arrUserInput[operationOrder] == ""){
+            addNumber(buttonInnerHTML);
+        }
     }
     else{
         addNumber(buttonInnerHTML);  
