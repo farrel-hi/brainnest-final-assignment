@@ -1,6 +1,4 @@
 # Simple Calculator
-
-## About
 Final Assignment of Brainnest Frontend Development Training Program is to create a simple calculator using vanilla HTML, CSS, and JavaScript
 
 ## Preview Link
