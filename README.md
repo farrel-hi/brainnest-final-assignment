@@ -1,8 +1,8 @@
-# brainnest-final-assignment
-Creating a Simple Calculator using HTML, CSS, and JavaScript
+# Simple Calculator
+Final Assignment of Brainnest Frontend Development Training Program is to create a simple calculator using vanilla HTML, CSS, and JavaScript
 
 ## Preview Link
-Preview Link: https://farrel-hi.github.io/brainnest-final-assignment/
+Preview Link: https://farrel-hi.github.io/simple-calculator/
 
 ## Style Guide
 Primary Color: 
