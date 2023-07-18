@@ -203,16 +203,30 @@ function checkButton(buttonInnerHTML) { //buttonInnerHTML = String
     }
 }
 
+function assignEvent(inputValue){
+        checkButton(inputValue);
+        displayValue();
+        changeValue();
+}
+
 const btn = document.querySelectorAll('button');
 for (let i = 0;i<btn.length;i++){
     btn[i].addEventListener("click", function(){
         let clickValue = btn[i].innerHTML;
-        // console.log(arrUserInput[0]);
-        // console.log(arrUserInput[1]);
-        // console.log(arrUserInput[2]);
-        // console.log(`operation Order: ${operationOrder}`);
-        checkButton(clickValue);
-        displayValue();
-        changeValue();
+        assignEvent(clickValue);
     });
 }
+
+document.addEventListener('keydown', (event) => {
+    let name = event.key;
+    if (name == "Enter"){
+        name = "=";
+    }
+    else if(name == "Backspace"){
+        name = "BS";
+    }
+    else if(name == "Delete"){
+        name = "C";
+    }
+    assignEvent(name);
+}, false);
